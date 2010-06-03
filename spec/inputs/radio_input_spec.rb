@@ -51,7 +51,6 @@ describe 'radio input' do
           concat(builder.input(:author, :as => :radio, :values_as_class => true, :find_options => {:conditions => {:publisher => true}}))
         end
 
-        p output_buffer
         output_buffer.should_not have_tag("form li fieldset ol li label input[find_options]")
       end
     end
