@@ -41,6 +41,21 @@ describe 'radio input' do
       output_buffer.should have_tag('form li input[@checked]', :count => 1)
     end
 
+    describe "find_options conditions" do
+      before(:each) do
+        output_buffer.replace('')
+      end
+
+      it "should not add find_options html attribute to output" do
+        semantic_form_for(@new_post) do |builder|
+          concat(builder.input(:author, :as => :radio, :values_as_class => true, :find_options => {:conditions => {:publisher => true}}))
+        end
+
+        p output_buffer
+        output_buffer.should_not have_tag("form li fieldset ol li label input[find_options]")
+      end
+    end
+
     describe "each choice" do
 
       it 'should contain a label for the radio input with a nested input and label text' do
